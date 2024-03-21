@@ -13,24 +13,50 @@
   </header>
   <main>
     <div class="form-div">
-      <form class="add-form" action="">
-        <label for="title">Judul</label>
-        <input type="text" name="" id="title">
-        <label for="author">Penulis</label>
-        <input type="text" name="" id="author">
-        <label for="year">Tahun</label>
-        <input type="date" name="" id="year">
-        <input type="checkbox" name="" id="is-complete">
-        <label for="is-complete">Sudah dibaca</label>
+      <!-- Add form -->
+      <form id="add-form" action="">
+        <div class="form-item">
+          <label for="title">Judul</label>
+          <input type="text" name="" id="title">
+        </div>
+        <div class="form-item">
+          <label for="author">Penulis</label>
+          <input type="text" name="" id="author">
+        </div>
+        <div class="form-item">
+          <label for="year">Tahun</label>
+          <input type="date" name="" id="year">
+        </div>
+        <div class="form-item">
+          <input type="checkbox" name="" id="is-complete">
+          <label for="is-complete">Sudah dibaca</label>
+        </div>
+        <div class="form-item">
+          <input type="submit" value="Tambah">
+        </div>
       </form>
-      <!--Search form-->
+      <!-- Search form -->
     </div>
     <div class="shelves-div">
       <div class="shelf-div">
         <h2>Belum dibaca</h2>
+        <div class="books-div">
+          <div>
+            <h3>Buku1</h3>
+            <p>Saya Pribadi</p>
+            <p>2024</p>
+          </div>
+        </div>
       </div>
       <div class="shelf-div">
         <h2>Sudah dibaca</h2>
+        <div class="books-div">
+          <div>
+            <h3>Buku2</h3>
+            <p>Kamu Pribadi</p>
+            <p>2023</p>
+          </div>
+        </div>
       </div>
     </div>
   </main>

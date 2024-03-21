@@ -1,6 +1,8 @@
 - HTML
-- MVP no-CSS
+-- Fitur Utama v
+- JS (no-CSS)
+-- Fitur Utama
 - CSS (first-mobile)
 - CSS (larger screen)
 
-1
+Pomodoro = 1
