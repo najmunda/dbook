@@ -6,9 +6,10 @@
 --- Tambah buku v
 --- Update UI v
 --- mencari BookID
+-- Multiple window
 
 - CSS (first-mobile)
 
 - CSS (larger screen)
 
-Pomodoro = 5
+Pomodoro = 7

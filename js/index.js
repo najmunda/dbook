@@ -8,6 +8,8 @@
 }
 */
 
+let books = [];
+
 // Check browser compatibility on local storage
 function isLocalStorageExist() {
   if (typeof(Storage) !== 'undefined') {
@@ -25,8 +27,7 @@ function isLocalStorageExist() {
   }
 }
 
-let addForm = document.getElementById("add-form")
-let books = [];
+isLocalStorageExist();
 
 // Sync session list and local storage every change
 function updateDB() {
@@ -42,7 +43,8 @@ function updateShelves() {
   uncompleteShelf.innerHTML = '';
   for (let book of books) {
     const bookDiv = document.createElement('div');
-    bookDiv.classList.add('book-card')
+    bookDiv.classList.add('book-card');
+    bookDiv.id = book.id;
     // Add book detail
     bookDiv.innerHTML = `<div class="book-detail">
                           <h3>${book.title}</h3>
@@ -52,14 +54,14 @@ function updateShelves() {
     // Add book action button based on isComplete value
     if (book.isComplete) {
       bookDiv.innerHTML += `<div class="book-action">
-                              <span class="material-symbols-outlined">delete</span>
-                              <span class="material-symbols-outlined">undo</span>
+                              <button class="material-symbols-outlined delete">delete</button>
+                              <button class="material-symbols-outlined undo">undo</button>
                             </div>`;
       completeShelf.appendChild(bookDiv);
     } else {
       bookDiv.innerHTML += `<div class="book-action">
-                              <span class="material-symbols-outlined">delete</span>
-                              <span class="material-symbols-outlined">done</span>
+                              <button class="material-symbols-outlined delete">delete</button>
+                              <button class="material-symbols-outlined done">done</button>
                             </div>`;     
       uncompleteShelf.appendChild(bookDiv); 
     }
@@ -67,6 +69,8 @@ function updateShelves() {
 }
 
 // Add new book from add-form
+let addForm = document.getElementById("add-form")
+
 function addBook() {
   const newBook = {};
   // Get data from form
@@ -87,14 +91,26 @@ addForm.addEventListener('submit', function(event) {
   event.preventDefault();
 });
 
-// Change isComplete status of a book
+// Move books between uncomplete & complete shelf
+let undoButtons = document.querySelectorAll('button.undo')
+let doneButtons = document.querySelectorAll('button.done')
 function reverseIsComplete(bookID) {
 
 }
 
-// Delete book from application
-function deleteBook(bookID) {
+// Remove book from shelves
+let deleteButtons = document.querySelectorAll('button.delete');
 
+function deleteBook() {
+  const id = this.parentNode.id;
+  console.log(id);
+  // Add to backend
+  //books.unshift(newBook);
+  //updateDB();
+  // Update app interface
+  //updateShelves();
 }
 
-isLocalStorageExist();
+deleteButtons.forEach((button) => {
+  button.addEventListener('click', deleteBook);
+});
