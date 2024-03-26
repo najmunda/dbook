@@ -1,8 +1,14 @@
 - HTML
 -- Fitur Utama v
+
 - JS (no-CSS)
 -- Fitur Utama
+--- Tambah buku v
+--- Update UI v
+--- mencari BookID
+
 - CSS (first-mobile)
+
 - CSS (larger screen)
 
-Pomodoro = 1
+Pomodoro = 5

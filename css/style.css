@@ -3,6 +3,8 @@
     flex-direction: column;
 }
 
-.books-div div {
-
+.book-card {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
 }
