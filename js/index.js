@@ -27,14 +27,12 @@ function isLocalStorageExist() {
   }
 }
 
-isLocalStorageExist();
-
 // Sync session list and local storage every change
 function updateDB() {
   localStorage.setItem('data', JSON.stringify(books));
 }
 
-// Update shelves interface every change
+// Update shelves interface every change based on books array
 function updateShelves() {
   const completeShelf = document.querySelector("#complete-shelf-div .books-div");
   const uncompleteShelf = document.querySelector("#uncomplete-shelf-div .books-div");
@@ -66,9 +64,45 @@ function updateShelves() {
       uncompleteShelf.appendChild(bookDiv); 
     }
   }
+  // Add event listener to button
+  let deleteButtons = document.querySelectorAll('button.delete');
+  let undoButtons = document.querySelectorAll('button.undo');
+  let doneButtons = document.querySelectorAll('button.done');
+  deleteButtons.forEach((button) => {
+    button.addEventListener('click', deleteBook);
+  });
+  undoButtons.forEach((button) => {
+    button.addEventListener('click', reverseIsComplete);
+  });
+  doneButtons.forEach((button) => {
+    button.addEventListener('click', reverseIsComplete);
+  });
 }
 
-// Add new book from add-form
+// Remove book from books array
+function deleteBook() {
+  const id = this.parentNode.parentNode.id;
+  console.log(id);
+  // Delete from backend
+  const index = books.findIndex((book) => book.id == id);
+  books.splice(index, 1);
+  updateDB();
+  // Update app interface
+  updateShelves();
+}
+
+// Reverse boolean book.isComplete on books array
+function reverseIsComplete(bookID) {
+  const id = this.parentNode.parentNode.id;
+  console.log(id);
+  // Update backend
+  //books.unshift(newBook);
+  //updateDB();
+  // Update app interface
+  //updateShelves();
+}
+
+// Add new book from add-form to books array
 let addForm = document.getElementById("add-form")
 
 function addBook() {
@@ -91,26 +125,4 @@ addForm.addEventListener('submit', function(event) {
   event.preventDefault();
 });
 
-// Move books between uncomplete & complete shelf
-let undoButtons = document.querySelectorAll('button.undo')
-let doneButtons = document.querySelectorAll('button.done')
-function reverseIsComplete(bookID) {
-
-}
-
-// Remove book from shelves
-let deleteButtons = document.querySelectorAll('button.delete');
-
-function deleteBook() {
-  const id = this.parentNode.id;
-  console.log(id);
-  // Add to backend
-  //books.unshift(newBook);
-  //updateDB();
-  // Update app interface
-  //updateShelves();
-}
-
-deleteButtons.forEach((button) => {
-  button.addEventListener('click', deleteBook);
-});
+isLocalStorageExist();

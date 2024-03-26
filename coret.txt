@@ -1,0 +1,54 @@
+backend = array dan localstorage
+
+Tambah buku
+- ambil data di form v
+- Update backend v
+- Update shelves v
+
+Hapus buku
+- Cari id buku yang diklik v
+- Hapus dari backend v
+- Update shelves v
+
+Tandai sudah dibaca
+- Cari buku yang diklik.
+- Ubah is complete ke true.
+- Update backend
+- Update shelves.
+
+Tandai belum dibaca
+- Cari buku yang diklik.
+- Ubah is complete ke false.
+- Update backend
+- Update shelves.
+
+Edit Buku
+
+=============================================
+Reload/Start app
+- Ambil data dari local storage
+- Update shelves
+
+Tambah buku
+- ambil data di form
+- Update backend
+- Tambah element ke rak
+
+Tandai sudah dibaca
+- Cari buku yang diklik
+- Ubah is complete ke true
+- Update backend
+- Hapus element dari rak uncomplete
+- Tambah element ke rak
+
+Tandai sudah dibaca
+- Cari buku yang diklik
+- Ubah is complete ke true
+- Update backend
+- Hapus element dari rak complete
+- Tambah element ke rak
+
+Hapus buku
+- Cari buku yang diklik.
+- Hapus dari backend
+- Update shelves.
