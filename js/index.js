@@ -52,12 +52,14 @@ function updateShelves() {
     // Add book action button based on isComplete value
     if (book.isComplete) {
       bookDiv.innerHTML += `<div class="book-action">
+                              <button class="material-symbols-outlined edit">edit_note</button>
                               <button class="material-symbols-outlined delete">delete</button>
                               <button class="material-symbols-outlined undo">undo</button>
                             </div>`;
       completeShelf.appendChild(bookDiv);
     } else {
       bookDiv.innerHTML += `<div class="book-action">
+                              <button class="material-symbols-outlined edit">edit_note</button>
                               <button class="material-symbols-outlined delete">delete</button>
                               <button class="material-symbols-outlined done">done</button>
                             </div>`;     
@@ -65,9 +67,13 @@ function updateShelves() {
     }
   }
   // Add event listener to button
+  let editButtons = document.querySelectorAll('button.edit');
   let deleteButtons = document.querySelectorAll('button.delete');
   let undoButtons = document.querySelectorAll('button.undo');
   let doneButtons = document.querySelectorAll('button.done');
+  editButtons.forEach((button) => {
+    button.addEventListener('click', editBook);
+  });
   deleteButtons.forEach((button) => {
     button.addEventListener('click', deleteBook);
   });
@@ -79,10 +85,23 @@ function updateShelves() {
   });
 }
 
+//
+function editBook() {
+  const id = this.parentNode.parentNode.id;
+  // Reverse book.isComplete boolean
+  const index = books.findIndex((book) => book.id == id);
+  books[index].isComplete = !books[index].isComplete;
+  const book = books[index]
+  books.splice(index, 1);
+  books.unshift(book);
+  updateDB();
+  // Update app interface
+  updateShelves();
+}
+
 // Remove book from books array
 function deleteBook() {
   const id = this.parentNode.parentNode.id;
-  console.log(id);
   // Delete from backend
   const index = books.findIndex((book) => book.id == id);
   books.splice(index, 1);
@@ -92,14 +111,17 @@ function deleteBook() {
 }
 
 // Reverse boolean book.isComplete on books array
-function reverseIsComplete(bookID) {
+function reverseIsComplete() {
   const id = this.parentNode.parentNode.id;
-  console.log(id);
-  // Update backend
-  //books.unshift(newBook);
-  //updateDB();
+  // Reverse book.isComplete boolean
+  const index = books.findIndex((book) => book.id == id);
+  books[index].isComplete = !books[index].isComplete;
+  const book = books[index]
+  books.splice(index, 1);
+  books.unshift(book);
+  updateDB();
   // Update app interface
-  //updateShelves();
+  updateShelves();
 }
 
 // Add new book from add-form to books array
