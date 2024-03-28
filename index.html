@@ -37,7 +37,16 @@
         </div>
       </form>
       <!-- Search form -->
+      <form id="search-form">
+        <label for="search">Cari buku</label>
+        <input type="text" name="search" id="search">
+        <div class="form-item">
+          <input type="submit" value="Cari">
+          <button type="reset" class="material-symbols-outlined refresh-search">refresh</button>
+        </div>
+      </form>
     </div>
+    <!-- Shelves DIV -->
     <div class="shelves-div">
       <div id="uncomplete-shelf-div">
         <h2>Belum dibaca</h2>
@@ -51,6 +60,18 @@
       </div>
     </div>
   </main>
+  <!-- Dialogs -->
+  <dialog id="delete-dialog">
+    <h2>Menghapus buku</h2>
+    <p>Apakah anda yakin menghapus buku ini?</p>
+    <form method="dialog">
+      <button formmethod="dialog" value="cancel">Batal</button>
+      <button formmethod="dialog" value="confirm">Hapus</button>
+    </form>
+  </dialog>
+  <dialog id="incompatible-dialog">
+    <p>Browser anda tidak mendukung local storage. Aplikasi tidak bisa digunakan.</p>
+  </dialog>
   <script src="js/index.js" type="text/javascript"></script>
 </body>
 </html>

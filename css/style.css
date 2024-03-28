@@ -1,4 +1,13 @@
+.form-div {
+    display: flex;
+}
+
 .add-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-form {
     display: flex;
     flex-direction: column;
 }

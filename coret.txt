@@ -17,6 +17,7 @@ Tandai sudah dibaca / belum dibaca
 - Update shelves v
 
 Edit Buku
+// Edit buku di form header atau dialog
 - Cari buku yang diklik
 - Tampilkan form
 - ambil data di form

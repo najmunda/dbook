@@ -1,6 +1,6 @@
 /*
 {
-  id: string | number,
+  id: number,
   title: string,
   author: string,
   year: number,
@@ -10,36 +10,43 @@
 
 let books = [];
 
+// ===LOCALSTORAGE COMPABILITY===
 // Check browser compatibility on local storage
 function isLocalStorageExist() {
-  if (typeof(Storage) !== 'undefined') {
+  return typeof(Storage) !== 'undefined' ? true : false;
+}
+
+// ===FIRST APP INITIATION===
+// Initiate localstorage on first open
+function initiateApp() {
+  if (isLocalStorageExist()) {
     // If application is opened for the first time
     if (localStorage.getItem('data') == null) {
       localStorage.setItem('data', JSON.stringify([]));
     } else { // If application has been used before.
       books = JSON.parse(localStorage.getItem('data'));
-      updateShelves();
+      updateShelves(books);
     }
-    return true;
-  } else {
-    alert('Mohon maaf, aplikasi ini tidak bisa digunakan karena browser anda tidak mendukung fitur Local Storage.')
-    return false;
   }
 }
 
+// ===SYNC array & LOCALSTORAGE===
 // Sync session list and local storage every change
 function updateDB() {
-  localStorage.setItem('data', JSON.stringify(books));
+  if (isLocalStorageExist()) {
+    localStorage.setItem('data', JSON.stringify(books));
+  }
 }
 
+// ===UPDATE SHELF (INTERFACE)===
 // Update shelves interface every change based on books array
-function updateShelves() {
+function updateShelves(booksArray = []) {
   const completeShelf = document.querySelector("#complete-shelf-div .books-div");
   const uncompleteShelf = document.querySelector("#uncomplete-shelf-div .books-div");
   // Reset interface
   completeShelf.innerHTML = '';
   uncompleteShelf.innerHTML = '';
-  for (let book of books) {
+  for (let book of booksArray) {
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book-card');
     bookDiv.id = book.id;
@@ -52,14 +59,14 @@ function updateShelves() {
     // Add book action button based on isComplete value
     if (book.isComplete) {
       bookDiv.innerHTML += `<div class="book-action">
-                              <button class="material-symbols-outlined edit">edit_note</button>
+                              <button class="material-symbols-outlined edit">edit</button>
                               <button class="material-symbols-outlined delete">delete</button>
                               <button class="material-symbols-outlined undo">undo</button>
                             </div>`;
       completeShelf.appendChild(bookDiv);
     } else {
       bookDiv.innerHTML += `<div class="book-action">
-                              <button class="material-symbols-outlined edit">edit_note</button>
+                              <button class="material-symbols-outlined edit">edit</button>
                               <button class="material-symbols-outlined delete">delete</button>
                               <button class="material-symbols-outlined done">done</button>
                             </div>`;     
@@ -85,31 +92,29 @@ function updateShelves() {
   });
 }
 
-//
-function editBook() {
-  const id = this.parentNode.parentNode.id;
-  // Reverse book.isComplete boolean
-  const index = books.findIndex((book) => book.id == id);
-  books[index].isComplete = !books[index].isComplete;
-  const book = books[index]
-  books.splice(index, 1);
-  books.unshift(book);
-  updateDB();
-  // Update app interface
-  updateShelves();
-}
-
+// ===DELETE BOOK===
 // Remove book from books array
 function deleteBook() {
+  // Get book id
   const id = this.parentNode.parentNode.id;
-  // Delete from backend
-  const index = books.findIndex((book) => book.id == id);
-  books.splice(index, 1);
-  updateDB();
-  // Update app interface
-  updateShelves();
+  // Show dialog
+  const dialog = document.getElementById('delete-dialog');
+  dialog.showModal();
+  // Decide deleting on pressed dialog button
+  dialog.addEventListener('close', function() {
+    console.log(dialog.returnValue);
+    if (dialog.returnValue == 'confirm') {
+      // Delete from backend
+      const index = books.findIndex((book) => book.id == id);
+      books.splice(index, 1);
+      updateDB();
+      // Update app interface
+      updateShelves(books);
+    }
+  }, {once: true});
 }
 
+// ===Move Book to Complete/Uncomplete Shelf===
 // Reverse boolean book.isComplete on books array
 function reverseIsComplete() {
   const id = this.parentNode.parentNode.id;
@@ -121,12 +126,27 @@ function reverseIsComplete() {
   books.unshift(book);
   updateDB();
   // Update app interface
-  updateShelves();
+  updateShelves(books);
 }
 
-// Add new book from add-form to books array
-let addForm = document.getElementById("add-form")
+// ===EDIT BOOK FORM===
+function editBook() {
+  const id = this.parentNode.parentNode.id;
+  // Reverse book.isComplete boolean
+  const index = books.findIndex((book) => book.id == id);
+  books[index].isComplete = !books[index].isComplete;
+  const book = books[index]
+  books.splice(index, 1);
+  books.unshift(book);
+  updateDB();
+  // Update app interface
+  updateShelves(books);
+}
 
+// ===ADD BOOK FORM===
+const addForm = document.getElementById("add-form");
+
+// Add new book from add-form to books array
 function addBook() {
   const newBook = {};
   // Get data from form
@@ -139,12 +159,38 @@ function addBook() {
   books.unshift(newBook);
   updateDB();
   // Update app interface
-  updateShelves();
+  updateShelves(books);
 }
 
 addForm.addEventListener('submit', function(event) {
   addBook();
+  this.reset();
   event.preventDefault();
 });
 
-isLocalStorageExist();
+// ===SEARCH FORM===
+const searchForm = document.getElementById("search-form");
+const refreshSearchButton = document.querySelector('button.refresh-search');
+
+// Search book from books array
+function searchBook() {
+  // Get data from form
+  const searchTitle = document.getElementById('search').value;
+  // Filter books array
+  const searchedBooks = books.filter((book) => book.title.includes(searchTitle));
+  // Update app interface
+  updateShelves(searchedBooks);
+}
+
+// Search button
+searchForm.addEventListener('submit', function(event) {
+  searchBook();
+  event.preventDefault();
+});
+
+// Refresh button
+refreshSearchButton.addEventListener('click', function () {
+  updateShelves(books);
+});
+
+initiateApp();

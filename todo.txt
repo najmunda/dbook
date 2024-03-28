@@ -3,13 +3,16 @@
 
 - JS (no-CSS)
 -- Fitur Utama
---- Tambah buku v
---- Update UI v
---- mencari BookID
--- Multiple window
+--- Search v
+--- Delete dialog v
+--- Edit books 
+--- isLocalStorage v
 
 - CSS (first-mobile)
 
 - CSS (larger screen)
 
-Pomodoro = 7
+- JS
+-- Mini dialog inform
+
+Pomodoro = 17
