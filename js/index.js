@@ -197,8 +197,7 @@ addForm.addEventListener('submit', function(event) {
 });
 
 // ===SEARCH FORM===
-const searchForm = document.getElementById("search-form");
-const refreshSearchButton = document.querySelector('button.refresh-search');
+const searchInput = document.querySelector("#search-form input");
 
 // Search book from books array
 function searchBook() {
@@ -211,14 +210,8 @@ function searchBook() {
 }
 
 // Search button
-searchForm.addEventListener('submit', function(event) {
+searchInput.addEventListener('input', function() {
   searchBook();
-  event.preventDefault();
-});
-
-// Refresh button
-refreshSearchButton.addEventListener('click', function () {
-  updateShelves(books);
 });
 
 initiateApp();

@@ -33,7 +33,7 @@ main {
 .form-div {
     width: 100%;
 
-    padding: 20px;
+    padding: 10px;
 
     border: 1px solid #D1D5DB;
     border-radius: 10px;
@@ -43,24 +43,69 @@ main {
     align-items: center;
 }
 
-#add-form {
-    display: none;
-}
+/* Add Form */
 
-#search-form {
+#add-form {
     width: 100%;
 
-    display: flex;
+    color: white;
+
+    display: none;
+    flex-direction: column;
+    gap: 10px;
     justify-content: center;
     align-items: stretch;
 }
 
-#search-form * {
-    line-height: 0;
+#add-form input {
+    background-color: #030712;
+    color: white;
+    border: none;
 }
 
-#edit-form {
+#add-form input#is-complete-add {
+    display: inline;
+}
+
+/* Search Form */
+
+#search-form {
+    width: 100%;
+
     display: none;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#search-form input {
+    width: 100%;
+    background-color: #030712;
+    border: none;
+    color: white;
+}
+
+/* Edit Form */
+
+#edit-form {
+    width: 100%;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#edit-form input {
+    background-color: #030712;
+    color: white;
+    border: none;
+}
+
+#edit-form input#is-complete-edit {
+    display: inline;
 }
 
 .book-card {
