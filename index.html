@@ -7,30 +7,36 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>dbook</h1>
+    <div class="app-title">
+      <span class="material-symbols-outlined">book</span>
+      <h1>dbook</h1>
+    </div>
   </header>
   <main>
     <div class="form-div">
       <!-- Add form -->
       <form id="add-form">
         <div class="form-item">
-          <label for="title">Judul</label>
-          <input type="text" name="title" id="title">
+          <label for="title-add">Judul</label>
+          <input type="text" name="title" id="title-add">
         </div>
         <div class="form-item">
-          <label for="author">Penulis</label>
-          <input type="text" name="author" id="author">
+          <label for="author-add">Penulis</label>
+          <input type="text" name="author" id="author-add">
         </div>
         <div class="form-item">
-          <label for="year">Tahun</label>
-          <input type="number" name="year" id="year">
+          <label for="year-add">Tahun</label>
+          <input type="number" name="year" id="year-add">
         </div>
         <div class="form-item">
-          <input type="checkbox" name="is-complete" id="is-complete">
-          <label for="is-complete">Sudah dibaca</label>
+          <input type="checkbox" name="is-complete" id="is-complete-add">
+          <label for="is-complete-add">Sudah dibaca</label>
         </div>
         <div class="form-item">
           <input type="submit" value="Tambah">
@@ -38,11 +44,33 @@
       </form>
       <!-- Search form -->
       <form id="search-form">
-        <label for="search">Cari buku</label>
-        <input type="text" name="search" id="search">
+        <input type="text" name="search" id="search" placeholder="Cari judul buku...">
         <div class="form-item">
           <input type="submit" value="Cari">
-          <button type="reset" class="material-symbols-outlined refresh-search">refresh</button>
+          <button type="reset" class="refresh-search"><i class="material-symbols-outlined">refresh</i></button>
+        </div>
+      </form>
+      <!-- Edit form -->
+      <form id="edit-form">
+        <div class="form-item">
+          <label for="title-edit">Judul</label>
+          <input type="text" name="title" id="title-edit">
+        </div>
+        <div class="form-item">
+          <label for="author-edit">Penulis</label>
+          <input type="text" name="author" id="author-edit">
+        </div>
+        <div class="form-item">
+          <label for="year-edit">Tahun</label>
+          <input type="number" name="year" id="year-edit">
+        </div>
+        <div class="form-item">
+          <input type="checkbox" name="is-complete" id="is-complete-edit">
+          <label for="is-complete-edit">Sudah dibaca</label>
+        </div>
+        <div class="form-item">
+          <input type="submit" value="Simpan">
+          <input type="button" value="Batal">
         </div>
       </form>
     </div>
@@ -61,6 +89,9 @@
     </div>
   </main>
   <!-- Dialogs -->
+  <dialog id="incompatible-dialog">
+    <p>Browser anda tidak mendukung local storage. Aplikasi tidak bisa digunakan.</p>
+  </dialog>
   <dialog id="delete-dialog">
     <h2>Menghapus buku</h2>
     <p>Apakah anda yakin menghapus buku ini?</p>
@@ -68,9 +99,6 @@
       <button formmethod="dialog" value="cancel">Batal</button>
       <button formmethod="dialog" value="confirm">Hapus</button>
     </form>
-  </dialog>
-  <dialog id="incompatible-dialog">
-    <p>Browser anda tidak mendukung local storage. Aplikasi tidak bisa digunakan.</p>
   </dialog>
   <script src="js/index.js" type="text/javascript"></script>
 </body>

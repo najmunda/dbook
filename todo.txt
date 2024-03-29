@@ -1,13 +1,3 @@
-- HTML
--- Fitur Utama v
-
-- JS (no-CSS)
--- Fitur Utama
---- Search v
---- Delete dialog v
---- Edit books 
---- isLocalStorage v
-
 - CSS (first-mobile)
 
 - CSS (larger screen)
@@ -15,4 +5,7 @@
 - JS
 -- Mini dialog inform
 
-Pomodoro = 17
+Pomodoro = 21
+
+bg = #030712 Gray 950
+outline = #D1D5DB Gray 300

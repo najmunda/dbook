@@ -16,15 +16,13 @@ Tandai sudah dibaca / belum dibaca
 - Update backend v
 - Update shelves v
 
-Edit Buku
-// Edit buku di form header atau dialog
-- Cari buku yang diklik
-- Tampilkan form
-- ambil data di form
-- Hapus buku yang diklik
-- Tambah buku yang diklik ke awal array
-- Update backend
-- Update shelves
+Edit Buku (dialog)
+- Cari buku yang diklik v
+- Tampilkan form v
+- ambil data di form v
+- Timpa buku yang diklik v
+- Update backend v
+- Update shelves v
 
 =============================================
 Reload/Start app

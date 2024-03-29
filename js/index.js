@@ -13,7 +13,14 @@ let books = [];
 // ===LOCALSTORAGE COMPABILITY===
 // Check browser compatibility on local storage
 function isLocalStorageExist() {
-  return typeof(Storage) !== 'undefined' ? true : false;
+  if (typeof(Storage) === 'undefined') {
+    // Show dialog
+    const dialog = document.getElementById('incompatible-dialog');
+    dialog.showModal();
+    return false;
+  } else {
+    return true;
+  }
 }
 
 // ===FIRST APP INITIATION===
@@ -130,17 +137,38 @@ function reverseIsComplete() {
 }
 
 // ===EDIT BOOK FORM===
+const editForm = document.getElementById("edit-form");
+
 function editBook() {
+  // Edit form element
+  const title = editForm.querySelector('#title-edit');
+  const author = editForm.querySelector('#author-edit');
+  const year = editForm.querySelector('#year-edit');
+  const isComplete = editForm.querySelector('#is-complete-edit');
+  // Get book detail
   const id = this.parentNode.parentNode.id;
-  // Reverse book.isComplete boolean
   const index = books.findIndex((book) => book.id == id);
-  books[index].isComplete = !books[index].isComplete;
   const book = books[index]
-  books.splice(index, 1);
-  books.unshift(book);
-  updateDB();
-  // Update app interface
-  updateShelves(books);
+  // Paste book detail to edit form
+  title.value = book.title;
+  author.value = book.author;
+  year.value = book.year;
+  isComplete.checked = book.isComplete;
+  // Get data from edit form after submit
+  editForm.addEventListener('submit', function(event) {
+    // Get data from edit form
+    book.title = title.value;
+    book.author = author.value;
+    book.year = year.value;
+    book.isComplete = isComplete.checked;
+    // Add to backend
+    books[index] = book;
+    updateDB();
+    // Update app interface
+    updateShelves(books);
+    this.reset();
+    event.preventDefault();
+  }, {once: true});
 }
 
 // ===ADD BOOK FORM===
@@ -149,12 +177,12 @@ const addForm = document.getElementById("add-form");
 // Add new book from add-form to books array
 function addBook() {
   const newBook = {};
-  // Get data from form
+  // Get data from add form
   newBook.id = +new Date();
-  newBook.title = document.getElementById('title').value;
-  newBook.author = document.getElementById('author').value;
-  newBook.year = document.getElementById('year').value;
-  newBook.isComplete = document.getElementById('is-complete').checked;
+  newBook.title = document.getElementById('title-add').value;
+  newBook.author = document.getElementById('author-add').value;
+  newBook.year = document.getElementById('year-add').value;
+  newBook.isComplete = document.getElementById('is-complete-add').checked;
   // Add to backend
   books.unshift(newBook);
   updateDB();

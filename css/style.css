@@ -1,15 +1,66 @@
+/* BODY */
+body {
+    height: 100%;
+
+    font-family: "Plus Jakarta Sans", Arial, Helvetica, sans-serif;
+
+    background-color: #030712;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+
+    padding: 10px;
+
+    color: white;
+    background-color: #030712;
+
+    border-bottom: 1px solid #D1D5DB;
+}
+
+header .app-title {
+    display: flex;
+    align-items: center;
+}
+
+/* MAIN */
+main {
+    padding: 10px;
+}
+
+/* MAIN Form Div */
 .form-div {
+    width: 100%;
+
+    padding: 20px;
+
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.add-form {
-    display: flex;
-    flex-direction: column;
+#add-form {
+    display: none;
 }
 
-.search-form {
+#search-form {
+    width: 100%;
+
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#search-form * {
+    line-height: 0;
+}
+
+#edit-form {
+    display: none;
 }
 
 .book-card {
