@@ -81,10 +81,25 @@ function updateShelves(booksArray = []) {
     }
   }
   // Add event listener to button
-  let editButtons = document.querySelectorAll('button.edit');
-  let deleteButtons = document.querySelectorAll('button.delete');
-  let undoButtons = document.querySelectorAll('button.undo');
-  let doneButtons = document.querySelectorAll('button.done');
+  const bookCards = document.querySelectorAll('.book-card');
+  const editButtons = document.querySelectorAll('button.edit');
+  const deleteButtons = document.querySelectorAll('button.delete');
+  const undoButtons = document.querySelectorAll('button.undo');
+  const doneButtons = document.querySelectorAll('button.done');
+  bookCards.forEach((card) => {
+    ['mouseover', 'touchmoves'].forEach((event) => {
+      card.addEventListener(event, function() {
+        const buttons = card.querySelector('.book-action');
+        buttons.style.display = 'flex';
+      });
+    });
+    ['mouseout', 'touchend'].forEach((event) => {
+      card.addEventListener(event, function() {
+        const buttons = card.querySelector('.book-action');
+        buttons.style.display = 'none';
+      });
+    });
+  });
   editButtons.forEach((button) => {
     button.addEventListener('click', editBook);
   });
@@ -109,7 +124,6 @@ function deleteBook() {
   dialog.showModal();
   // Decide deleting on pressed dialog button
   dialog.addEventListener('close', function() {
-    console.log(dialog.returnValue);
     if (dialog.returnValue == 'confirm') {
       // Delete from backend
       const index = books.findIndex((book) => book.id == id);
@@ -137,10 +151,12 @@ function reverseIsComplete() {
 }
 
 // ===EDIT BOOK FORM===
-const editForm = document.getElementById("edit-form");
-
 function editBook() {
+  // Show dialog
+  const dialog = document.getElementById('edit-dialog');
+  dialog.showModal();
   // Edit form element
+  const editForm = document.getElementById('edit-form');
   const title = editForm.querySelector('#title-edit');
   const author = editForm.querySelector('#author-edit');
   const year = editForm.querySelector('#year-edit');
@@ -155,19 +171,19 @@ function editBook() {
   year.value = book.year;
   isComplete.checked = book.isComplete;
   // Get data from edit form after submit
-  editForm.addEventListener('submit', function(event) {
-    // Get data from edit form
-    book.title = title.value;
-    book.author = author.value;
-    book.year = year.value;
-    book.isComplete = isComplete.checked;
-    // Add to backend
-    books[index] = book;
-    updateDB();
-    // Update app interface
-    updateShelves(books);
-    this.reset();
-    event.preventDefault();
+  dialog.addEventListener('close', function() {
+    if (dialog.returnValue == 'confirm') {
+      // Get data from edit form
+      book.title = title.value;
+      book.author = author.value;
+      book.year = year.value;
+      book.isComplete = isComplete.checked;
+      // Add to backend
+      books[index] = book;
+      updateDB();
+      // Update app interface
+      updateShelves(books);
+    }
   }, {once: true});
 }
 
@@ -213,5 +229,20 @@ function searchBook() {
 searchInput.addEventListener('input', function() {
   searchBook();
 });
+
+// Menu & Search Button Navigation on Header
+const addHeaderButton = document.getElementById("header-add-btn");
+const searchHeaderButton = document.getElementById("header-search-btn");
+const searchForm = document.getElementById("search-form");
+
+addHeaderButton.addEventListener('click', function() {
+  addForm.style.display = 'flex';
+  searchForm.style.display = 'none';
+})
+
+searchHeaderButton.addEventListener('click', function() {
+  searchForm.style.display = 'flex';
+  addForm.style.display = 'none';
+})
 
 initiateApp();

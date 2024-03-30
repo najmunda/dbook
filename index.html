@@ -14,9 +14,13 @@
 <body>
   <header>
     <div class="app-title">
-      <span class="material-symbols-outlined">book</span>
+      <i class="material-symbols-outlined">book</i>
       <h1>dbook</h1>
     </div>
+    <menu>
+      <button class="material-symbols-outlined" id="header-search-btn">search</button>
+      <button class="material-symbols-outlined" id="header-add-btn">add</button>
+    </menu>
   </header>
   <main>
     <div class="form-div">
@@ -29,25 +33,11 @@
           <input type="checkbox" name="is-complete" id="is-complete-add">
           <label for="is-complete-add">Sudah dibaca</label>
         </div>
-        <input type="submit" value="Tambah">
+        <button type="submit">Tambah</button>
       </form>
       <!-- Search form -->
       <form id="search-form">
         <input type="search" name="search" id="search" placeholder="Cari judul buku...">
-      </form>
-      <!-- Edit form -->
-      <form id="edit-form">
-        <input type="text" name="title" id="title-edit" placeholder="Judul buku...">
-        <input type="text" name="author" id="author-edit" placeholder="Penulis...">
-        <input type="number" name="year" id="year-edit" placeholder="Tahun terbit...">
-        <div class="form-item">
-          <input type="checkbox" name="is-complete" id="is-complete-edit">
-          <label for="is-complete-edit">Sudah dibaca</label>
-        </div>
-        <div class="form-item">
-          <input type="submit" value="Simpan">
-          <input type="button" value="Batal">
-        </div>
       </form>
     </div>
     <!-- Shelves DIV -->
@@ -69,11 +59,26 @@
     <p>Browser anda tidak mendukung local storage. Aplikasi tidak bisa digunakan.</p>
   </dialog>
   <dialog id="delete-dialog">
-    <h2>Menghapus buku</h2>
-    <p>Apakah anda yakin menghapus buku ini?</p>
     <form method="dialog">
-      <button formmethod="dialog" value="cancel">Batal</button>
+      <h2>Menghapus buku</h2>
+      <p>Apakah anda yakin menghapus buku ini?</p>
       <button formmethod="dialog" value="confirm">Hapus</button>
+      <button formmethod="dialog" value="cancel">Batal</button>
+    </form>
+  </dialog>
+  <dialog id="edit-dialog">
+    <!-- Edit form -->
+    <form id="edit-form" method="dialog">
+      <h2>Edit buku</h2>
+      <input type="text" name="title" id="title-edit" placeholder="Judul buku...">
+      <input type="text" name="author" id="author-edit" placeholder="Penulis...">
+      <input type="number" name="year" id="year-edit" placeholder="Tahun terbit...">
+      <div class="form-item">
+        <input type="checkbox" name="is-complete" id="is-complete-edit">
+        <label for="is-complete-edit">Sudah dibaca</label>
+      </div>
+      <button formmethod="dialog" value="confirm">Simpan</button>
+      <button formmethod="dialog" value="cancel">Batal</button>
     </form>
   </dialog>
   <script src="js/index.js" type="text/javascript"></script>
