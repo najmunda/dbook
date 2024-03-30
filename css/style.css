@@ -21,6 +21,10 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
+
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 header .app-title {
@@ -46,14 +50,19 @@ header menu button {
     border: none;
 }
 
+header menu button:hover {
+    background-color: #1F2937;
+}
+
 /* MAIN */
 main {
-    padding: 10px;
+    padding-block: 20px;
+    padding-inline: 10px;
 
     display: flex;
     flex-direction: column;
     gap: 15px;
-    align-items: stretch;
+    align-items: center;
 }
 
 /* MAIN Form Div */
@@ -198,16 +207,22 @@ main {
 .book-card .book-action {
     display: none;
     justify-content: space-evenly;
-    transition: ease-in-out;
 }
 
 .book-card .book-action button {
+    padding: 3px;
+
     height: fit-content;
 
     color: white;
 
     background-color: #030712;
     border: none;
+}
+
+.book-card .book-action button:hover {
+    background-color: #374151;
+    border-radius: 10px;
 }
 
 /* DIALOG */
@@ -241,4 +256,24 @@ dialog form button {
     background-color: #030712;
     border: 1px solid #D1D5DB;
     border-radius: 10px;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    main {
+        padding-inline: 12%;
+    }
+
+    .form-div {
+        width: 75%;
+    }
+
+    .shelves-div {
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .shelves-div > div {
+        width: 50%;
+    }
 }

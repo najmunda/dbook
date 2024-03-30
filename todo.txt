@@ -5,7 +5,9 @@
 - JS
 -- Mini dialog inform
 
-Pomodoro = 29
+Pomodoro = 30
 
 bg = #030712 Gray 950
 outline = #D1D5DB Gray 300
+btn hover bg = #1F2937 Gray 800
+Gray 700 #374151
